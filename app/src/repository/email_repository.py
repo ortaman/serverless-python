@@ -11,7 +11,7 @@ class SmtpEmail:
     def __init__(self, smtp_config):
         self.smtp_config = smtp_config
 
-    def _generate_body(self, transactions_by_month, transactions_resume):
+    def _generate_body(self, transactions_by_month, transactions_resume) -> str:
 
         environment = Environment(loader=FileSystemLoader(self.smtp_config.STMP_FILE_LOADER))
         template = environment.get_template(self.smtp_config.STMP_TEMPLATE_DIR)
@@ -22,12 +22,12 @@ class SmtpEmail:
         )
         return template_render
 
-    def send_email_smtp(self, emails_to_send, transactions_by_month, transactions_resume):
+    def send_email_smtp(self, email_to_send: str, transactions_by_month: dict, transactions_resume: dict) -> None:
         msg = email.message.Message()
 
         msg['Subject'] = self.smtp_config.EMAIL_SUBJECT
         msg['From'] = self.smtp_config.EMAIL_FROM
-        msg['To'] = emails_to_send
+        msg['To'] = email_to_send
 
         msg.add_header('Content-Type', 'text/html')
         msg.set_payload(self._generate_body(transactions_by_month, transactions_resume))
@@ -38,6 +38,6 @@ class SmtpEmail:
 
             server.sendmail(
                 from_addr=self.smtp_config.EMAIL_FROM,
-                to_addrs=emails_to_send,
+                to_addrs=email_to_send,
                 msg=msg.as_string()
             )

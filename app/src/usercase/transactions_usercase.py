@@ -5,7 +5,7 @@ class TnxsResume:
         self.db = db
         self.smtp_email = smtp_email
 
-    def calculate_transactions_resume(self, data_transactions):
+    def calculate_transactions_resume(self, data_transactions: tuple[tuple]) -> tuple[dict, dict]:
 
         total_balance = 0
         debit_average = 0
@@ -38,9 +38,9 @@ class TnxsResume:
 
         return transactions_by_month, transactions_resume
 
-    def send_transactions_email(self, email_to_send, data_transactions):
+    def send_transactions_email(self, email_to_send: str, data_transactions: tuple[tuple]) -> None:
         transactions_by_month, transactions_resume = self.calculate_transactions_resume(data_transactions)
         self.smtp_email.send_email_smtp(email_to_send, transactions_by_month, transactions_resume)
 
-    def save_transactions(self, data_transactions):
+    def save_transactions(self, data_transactions: tuple[tuple]) -> None:
         db_adapters.save_transactions(self.db, data_transactions)

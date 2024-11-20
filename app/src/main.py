@@ -38,11 +38,11 @@ def handler(event, context):
     smtp_email = email_repository.SmtpEmail(email_config)
 
     customer_id = db_adapters.save_or_get_customer_by_email(db, email_to_send)
-    data_trasactions = txns_adapters.validate_csv_transactions(CSV_DIR, customer_id)
+    data_transactions = txns_adapters.validate_csv_transactions(CSV_DIR, customer_id)
 
     tnxs_resume = transactions_usercase.TnxsResume(db, smtp_email)
-    tnxs_resume.save_transactions(data_trasactions)
-    tnxs_resume.send_transactions_email(email_to_send, data_trasactions)
+    tnxs_resume.save_transactions(data_transactions)
+    tnxs_resume.send_transactions_email(email_to_send, data_transactions)
 
     return {
         'statusCode': 200,

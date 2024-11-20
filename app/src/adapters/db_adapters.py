@@ -1,6 +1,6 @@
 
 
-def save_or_get_customer_by_email(db, email):
+def save_or_get_customer_by_email(db, email: str) -> int:
     customer = db.get(f"SELECT * FROM customer WHERE email='{email}'")
 
     if not customer:
@@ -12,7 +12,7 @@ def save_or_get_customer_by_email(db, email):
     return customer[0]
 
 
-def save_transactions(db, data):
+def save_transactions(db, data: tuple) -> None:
 
     query = b"INSERT INTO transactions(id, trans_date, amount, customer_id) VALUES "
     db.save_many(query, data)

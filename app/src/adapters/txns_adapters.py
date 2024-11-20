@@ -7,7 +7,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 
-def validate_csv_transactions(csv_dir, customer_id) -> tuple:
+def validate_csv_transactions(csv_dir: str, customer_id: int) -> tuple[tuple]:
 
     with open(csv_dir, "r") as csv_file:
         csv_reader = csv.DictReader(csv_file)

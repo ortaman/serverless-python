@@ -21,7 +21,7 @@ class PostgresDb:
             logger.error("ERROR: Error connecting to the database")
             logger.error(exception)
 
-    def save_many(self, query, data):
+    def save_many(self, query: bytes, data: tuple) -> None:
         try:
             cursor = self.connection.cursor()
 
@@ -35,7 +35,7 @@ class PostgresDb:
             logger.error(exception)
             self.connection.rollback()
 
-    def save(self, query, data):
+    def save(self, query: str, data: tuple) -> tuple:
         try:
             cursor = self.connection.cursor()
             cursor.execute(query, data)
@@ -47,7 +47,7 @@ class PostgresDb:
             logger.error("Error while save data from PostgreSQL")
             logger.error(exception)
 
-    def get(self, query):
+    def get(self, query: str) -> tuple:
         try:
             cursor = self.connection.cursor()
             cursor.execute(query)
