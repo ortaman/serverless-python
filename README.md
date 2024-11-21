@@ -45,3 +45,8 @@ psql -U db_user -d db_stori            # Connection to database
 SELECT * FROM customer;                # read customer table
 SELECT * FROM transactions;
 ```
+
+- To run the aplication deployed in AWS:
+```bash
+curl -X POST https://rq83jjolo6.execute-api.us-west-1.amazonaws.com/Prod/send_email -d "{\"email\":\"ente011@gmail.com\"}"
+```
