@@ -34,5 +34,14 @@ docker compose up
 
 - Open a new terminal and run the next command with the email to send the information:
 ```bash
-curl "http://localhost:8080/2015-03-31/functions/function/invocations" -d '{"body": "{\"email\":\"username@domain.com\"}"}'
+curl "http://localhost:8080/2015-03-31/functions/function/invocations" -d '{"body": "{\"email\":\"ente011@gmail.com\"}"}'
 ```
+
+- You can review the database information with the nexts commands
+```bash
+docker exec -it stori-db  bash         # Connection to docker database
+psql -U db_user -d db_stori            # Connection to database
+
+SELECT * FROM customer;                # read customer table
+SELECT * FROM transactions;
+```bash
